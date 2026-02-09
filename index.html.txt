@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For the Love of My Life ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff5f9e, #ff9a9e);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .card {
+      background: #fff3ea;
+      width: 90%;
+      max-width: 700px;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.2);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .text {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .text h2 {
+      margin-top: 0;
+      color: #e84a7a;
+    }
+
+    .timer {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .heart-tree {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    svg {
+      width: 100%;
+      max-width: 260px;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="text">
+      <h2>Denis ❤️ Ariseldi</h2>
+      <p>
+        If I could choose a safe place, it would be by your side.<br />The more time I spend with you, the more I love you, Ariseldi.
+      </p>
+      <p><strong>I love you ❤️</strong></p>
+
+      <div class="timer" id="timer"></div>
+    </div>
+
+    <div class="heart-tree">
+      <svg viewBox="0 0 200 260">
+        <!-- trunk -->
+        <rect x="90" y="150" width="20" height="80" fill="#8b5a2b" />
+        <!-- heart leaves -->
+        <g fill="#e63946">
+          <path d="M100 40
+                   C 100 20, 60 20, 60 55
+                   C 60 85, 100 110, 100 110
+                   C 100 110, 140 85, 140 55
+                   C 140 20, 100 20, 100 40 Z" />
+        </g>
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    // CHANGE THIS DATE ❤️
+    const startDate = new Date('2025-01-01T12:00:00');
+
+    function updateTimer() {
+      const now = new Date();
+      let diff = Math.floor((now - startDate) / 1000);
+
+      const days = Math.floor(diff / 86400);
+      diff %= 86400;
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+
+      document.getElementById('timer').innerHTML =
+        `Denis has loved Ariseldi for ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+    }
+
+    updateTimer();
+    setInterval(updateTimer, 1000);
+  </script>
+</body>
+</html>
