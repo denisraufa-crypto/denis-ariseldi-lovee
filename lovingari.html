@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For the Love of My Life 💞</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ff5f9e, #ff9a9e);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      overflow: hidden;
+    }
+
+    .card {
+      display: flex;
+      background: #fff3ea;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 900px;
+      width: 90%;
+      align-items: center;
+      gap: 40px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.2);
+      position: relative;
+    }
+
+    /* Heart-tree container */
+    .heart-tree-container {
+      position: relative;
+      width: 260px;
+      height: 260px;
+    }
+
+    .tree-heart {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .heart-tree-base {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      animation: treeFade 0.5s forwards;
+      animation-delay: 3.5s;
+    }
+
+    @keyframes treeFade {
+      to { opacity: 1; }
+    }
+
+    .text {
+      flex: 1;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      animation-delay: 4.5s;
+    }
+
+    .text h2 {
+      margin-top: 0;
+      color: #e84a7a;
+    }
+
+    .text p {
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .timer {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      animation-delay: 5.5s;
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Floating hearts animation */
+    .floating-heart {
+      position: absolute;
+      font-size: 1rem;
+      color: #ff6b81;
+      animation: floatUp 3s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(0.5); opacity: 0; }
+    }
+
+    @media (max-width: 800px) {
+      .card {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .heart-tree-container {
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <!-- Heart-tree section -->
+    <div class="heart-tree-container" id="heartTreeContainer">
+      <!-- Base SVG tree trunk -->
+      <svg class="heart-tree-base" viewBox="0 0 200 260">
+        <rect x="90" y="150" width="20" height="80" fill="#8b5a2b" />
+      </svg>
+    </div>
+
+    <!-- Text section -->
+    <div class="text">
+      <h2>Denis 💞 Ariseldi</h2>
+      <p>If I could choose a safe place, it would be by your side.<br>The more time I spend with you, the more I love you, Ariseldi.</p>
+      <p><strong>I love you 💖 LOML 🥺</strong></p>
+      <div class="timer" id="timer"></div>
+    </div>
+  </div>
+
+  <script>
+    const container = document.getElementById('heartTreeContainer');
+
+    // Predefined positions for hearts to form tree shape
+    const heartPositions = [
+      {x:100, y:50}, {x:80, y:60}, {x:120, y:60},
+      {x:60, y:80}, {x:140, y:80},
+      {x:100, y:90}, {x:70, y:110}, {x:130, y:110},
+      {x:90, y:130}, {x:110, y:130}
+    ];
+
+    // Function to animate hearts flying to their positions
+    function createTreeHearts() {
+      heartPositions.forEach((pos, index) => {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'tree-heart';
+          heart.style.left = '50%';
+          heart.style.top = '100%';
+          heart.innerText = '💞';
+          container.appendChild(heart);
+
+          heart.animate([
+            { transform: `translate(-50%, 0) scale(0)`, opacity: 0 },
+            { transform: `translate(${pos.x - 100}px, ${pos.y - 130}px) scale(1)`, opacity: 1 }
+          ], {
+            duration: 1500,
+            easing: 'ease-out',
+            fill: 'forwards'
+          });
+        }, index * 300);
+      });
+    }
+
+    setTimeout(createTreeHearts, 500); // start forming hearts after 0.5s
+
+    // Floating hearts effect
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+      heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+      heart.innerText = '❤️';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 3000);
+    }
+
+    setInterval(createFloatingHeart, 500);
+
+    // Timer
+    const startDate = new Date('2025-01-01T12:00:00');
+
+    function updateTimer() {
+      const now = new Date();
+      let diff = Math.floor((now - startDate) / 1000);
+
+      const days = Math.floor(diff / 86400);
+      diff %= 86400;
+      const hours = Math.floor(diff / 3600);
+      diff %= 3600;
+      const minutes = Math.floor(diff / 60);
+      const seconds = diff % 60;
+
+      document.getElementById('timer').innerHTML =
+        `Denis has loved Ariseldi for ${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+    }
+
+    setTimeout(() => {
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }, 5500); // start timer after hearts animation
+  </script>
+</body>
+</html>
